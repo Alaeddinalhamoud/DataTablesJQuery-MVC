@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 using System.Web.Script.Services;
 using System.Web.Services;
 
@@ -40,9 +41,10 @@ namespace DataTablesJQuery_MVC.Controllers
             int j = 0;
             foreach (var i in model)
             {
-                UserData[j] = new object[] {i.ID, i.ID, i.FirstName ,i.LastName, i.City };
+                UserData[j] = new object[] {i.ID, i.FirstName ,i.LastName, i.City};
                 j++;
             }
+           
             return Json(UserData, JsonRequestBehavior.AllowGet);
         }
     }

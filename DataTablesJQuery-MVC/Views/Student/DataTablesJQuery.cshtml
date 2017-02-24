@@ -18,27 +18,28 @@ tr.details td.details-control {
 <h2>DataTables JQuery</h2>
 
  <table id="example" class="display" cellspacing="0" width="100%">
-    <thead>
-        <tr>
-            <th></th>
-            <th>ID</th>
-            <th>First name</th>
-            <th>Last name</th>
-            <th>City</th>
+     <thead>
+         <tr>
              
-        </tr>
-    </thead>
-
-    <tfoot>
-        <tr>
-            <th></th>
-            <th>ID</th>
-            <th>First name</th>
-            <th>Last name</th>
-            <th>City</th>
+             <th>ID</th>
+             <th>First Name</th>
+             <th>Last Name</th>
+             <th>City</th>
+              
+              
+         </tr>
+     </thead>
+     <tfoot>
+         <tr>
+             
+             <th>ID</th>
+             <th>First Name</th>
+             <th>Last Name</th>
+             <th>City</th>
             
-        </tr>
-    </tfoot>
+             
+         </tr>
+     </tfoot>
 </table>
  @section Scripts{
 <script src="~/Scripts/jquery-3.1.1.js"></script>
@@ -46,43 +47,28 @@ tr.details td.details-control {
 <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript">
 
-    function format(d) {
-        return 'Full name: ' + d.FirstName + ' ' + d.LastName + '<br>' +
-            'Salary: ' + d.City + '<br>' +
-            'The child row can contain any data you wish, including links, images, inner tables etc.';
-    }
-    var dt;
     $(document).ready(function () {
+       
         $.ajax({
             url: "DataTablesJQueryJSON",
             dataType: "json",
             contentType: "application/json; chartset=utf-8",
-            success: function (data) {
-                UserData = data;
+            success: function (result) {
+
+                $('#example').DataTable({
+                    data: result
+                   
+                });
+
             },
             error: function () {
                 alert("Error loading data! Please try again.");
             }
-        }).done(function () {
-       dt  =   $('#example').DataTable({
-             data: UserData,
-             "columns": [
-           {
-               "class": "details-control",
-               "orderable": false,
-               "data": null,
-               "defaultContent": ""
-           },
-           { "title": UserData.ID },
-           { "title": UserData.FirstName },
-           { "title": "LastName" },
-           { "title": "City" }
-             ] 
-         });
-           
-
-
         });
+      
     });
+
+  
+
 </script>
     }
